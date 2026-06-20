@@ -35,11 +35,3 @@ analyzeButton.addEventListener('click', ()=>{
 });
 resetButton.addEventListener('click', ()=>{ feedbackStep.classList.add('hidden'); inputStep.classList.remove('hidden'); text.focus(); });
 
-document.getElementById('waitlistForm').addEventListener('submit',(e)=>{
-  e.preventDefault();
-  const email = document.getElementById('email');
-  const role = document.getElementById('role');
-  const note = document.getElementById('formNote');
-  note.textContent = `You’re on the early-access list as a ${role.value.toLowerCase()}. We’ll be in touch at ${email.value}.`;
-  email.value='';
-});
