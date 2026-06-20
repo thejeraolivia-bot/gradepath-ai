@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CXC English A Pilot | GradePath AI</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <main style="max-width:900px; margin:0 auto; padding:60px 24px;">
+    <a href="/" style="display:inline-block; margin-bottom:32px;">← Back to GradePath AI</a>
+
+    <p class="eyebrow">GRADEPATH AI EARLY PILOT</p>
+    <h1>Help us build a better way to prepare for CXC English A.</h1>
+
+    <p style="font-size:1.15rem; line-height:1.7;">
+      GradePath AI is testing a writing-feedback tool that helps students understand
+      how to improve essays before exam day.
+    </p>
+
+    <h2>What pilot students will receive</h2>
+    <ul style="line-height:1.9;">
+      <li>Structured feedback on practice writing</li>
+      <li>Clear revision tasks</li>
+      <li>Advice on common English A writing mistakes</li>
+      <li>Early access to GradePath AI features</li>
+    </ul>
+
+    <h2>Who can apply</h2>
+    <p>
+      Students preparing for CXC English A, parents of CXC students, and English teachers
+      interested in testing the product.
+    </p>
+
+    <h2>Join the early pilot</h2>
+
+    <form
+      name="gradepath-pilot"
+      method="POST"
+      action="/thank-you.html"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      style="display:grid; gap:16px; max-width:600px;"
+    >
+      <input type="hidden" name="form-name" value="gradepath-pilot">
+
+      <p hidden>
+        <label>
+          Don’t fill this out:
+          <input name="bot-field">
+        </label>
+      </p>
+
+      <label>
+        Your name
+        <input required type="text" name="name" placeholder="Your name">
+      </label>
+
+      <label>
+        Email address
+        <input required type="email" name="email" placeholder="Email address">
+      </label>
+
+      <label>
+        I am a:
+        <select required name="role">
+          <option value="">Choose one</option>
+          <option value="Student">Student</option>
+          <option value="Parent">Parent</option>
+          <option value="Teacher">Teacher</option>
+        </select>
+      </label>
+
+      <label>
+        Country or island
+        <input type="text" name="location" placeholder="Example: Bahamas">
+      </label>
+
+      <label>
+        Tell us what you need help with
+        <textarea
+          name="message"
+          rows="5"
+          placeholder="Example: I need help improving essay structure and grammar."
+        ></textarea>
+      </label>
+
+      <button class="btn btn-coral" type="submit">Apply for the pilot</button>
+    </form>
+
+    <p style="margin-top:20px;">
+      We will contact selected pilot users with next steps. Do not submit school records,
+      official exam papers, or sensitive personal information through this form.
+    </p>
+  </main>
+</body>
+</html>
