@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Essay Feedback Test | GradePath AI</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <main style="max-width:900px; margin:0 auto; padding:60px 24px;">
+
+    <a href="/" style="display:inline-block; margin-bottom:32px;">
+      ← Back to GradePath AI
+    </a>
+
+    <p class="eyebrow">CXC ENGLISH A PRACTICE</p>
+
+    <h1>Get feedback on your writing.</h1>
+
+    <p style="font-size:1.15rem; line-height:1.7;">
+      Paste a short practice paragraph below. GradePath AI will show an example
+      of the type of feedback students will receive during the pilot.
+    </p>
+
+    <label for="studentEssay" style="display:block; margin-top:32px; font-weight:bold;">
+      Your practice paragraph
+    </label>
+
+    <textarea
+      id="studentEssay"
+      rows="12"
+      placeholder="Write or paste a short English A practice paragraph here..."
+      style="width:100%; margin-top:10px; padding:16px; font-size:16px;"
+    ></textarea>
+
+    <button
+      id="feedbackButton"
+      class="btn btn-coral"
+      style="margin-top:20px;"
+    >
+      Get example feedback
+    </button>
+
+    <section
+      id="feedbackBox"
+      style="display:none; margin-top:40px; padding:28px; border-radius:18px; background:#f7f3ec;"
+    >
+      <p class="eyebrow">GRADEPATH AI FEEDBACK</p>
+
+      <h2>Your feedback is ready</h2>
+
+      <p>
+        You have started with a clear idea. Your next improvement is to explain
+        your examples more deeply and connect each sentence back to your main point.
+      </p>
+
+      <h3>What you did well</h3>
+      <ul>
+        <li>You stayed on topic.</li>
+        <li>You gave at least one clear idea.</li>
+        <li>Your paragraph has a beginning, middle, and ending.</li>
+      </ul>
+
+      <h3>What to improve next</h3>
+      <ul>
+        <li>Add a specific example to support your point.</li>
+        <li>Explain why your example matters.</li>
+        <li>Check for long sentences that should be split into two.</li>
+      </ul>
+
+      <h3>Your revision task</h3>
+      <p>
+        Rewrite your strongest sentence and add one sentence explaining why it supports your main point.
+      </p>
+    </section>
+
+  </main>
+
+  <script>
+    const feedbackButton = document.getElementById("feedbackButton");
+    const feedbackBox = document.getElementById("feedbackBox");
+    const studentEssay = document.getElementById("studentEssay");
+
+    feedbackButton.addEventListener("click", () => {
+      if (studentEssay.value.trim().length < 30) {
+        alert("Please write at least a few sentences before getting feedback.");
+        return;
+      }
+
+      feedbackBox.style.display = "block";
+      feedbackBox.scrollIntoView({ behavior: "smooth" });
+    });
+  </script>
+
+</body>
+</html>
