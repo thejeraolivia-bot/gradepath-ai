@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Progress | GradePath AI</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <main style="max-width:900px; margin:0 auto; padding:60px 24px;">
+    <a href="essay-feedback.html" style="display:inline-block; margin-bottom:32px;">
+      ← Back to Essay Feedback
+    </a>
+
+    <p class="eyebrow">GRADEPATH AI PROGRESS</p>
+    <h1>My saved feedback</h1>
+
+    <p id="progressMessage" style="font-size:1.05rem; line-height:1.7;">
+      Loading your saved practice feedback...
+    </p>
+
+    <div id="historyList" style="display:grid; gap:18px; margin-top:28px;"></div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+
+  <script>
+    const progressMessage = document.getElementById("progressMessage");
+    const historyList = document.getElementById("historyList");
+
+    function escapeHtml(text = "") {
+      return text.replace(/[&<>"']/g, (character) => {
+        const characters = {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;"
+        };
+
+        return characters[character];
+      });
+    }
+
+    async function loadFeedbackHistory() {
+      const {
+        data: { user }
+      } = await supabaseClient.auth.getUser();
+
+      if (!user) {
+        progressMessage.innerHTML =
+          'Please <a href="account.html">log in</a> to view your saved feedback.';
+        return;
+      }
+
+      const { data, error } = await supabaseClient
+        .from("feedback_history")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        progressMessage.textContent = error.message;
+        return;
+      }
+
+      if (!data.length) {
+        progressMessage.textContent =
+          "You have not saved any feedback yet. Complete a practice response and save it to see it here.";
+        return;
+      }
+
+      progressMessage.textContent = `You have ${data.length} saved feedback item${data.length === 1 ? "" : "s"}.`;
+
+      historyList.innerHTML = data.map((item) => `
+        <article style="padding:24px; border-radius:18px; background:#f7f3ec;">
+          <p style="margin-top:0; color:#5f6d73;">
+            ${new Date(item.created_at).toLocaleDateString()}
+          </p>
+
+          <h2 style="margin-bottom:8px;">
+            ${escapeHtml(item.writing_type)}
+          </h2>
+
+          <p><strong>Prompt:</strong> ${escapeHtml(item.practice_prompt || "No prompt selected.")}</p>
+
+          <details style="margin-top:18px;">
+            <summary style="cursor:pointer; font-weight:bold;">View feedback</summary>
+
+            <div style="margin-top:16px; line-height:1.7;">
+              <h3>Strengths</h3>
+              <p>${escapeHtml(item.strengths || "")}</p>
+
+              <h3>Improve</h3>
+              <p>${escapeHtml(item.improvements || "")}</p>
+
+              <h3>Revision Task</h3>
+              <p>${escapeHtml(item.revision_task || "")}</p>
+
+              <h3>Your Practice Response</h3>
+              <p style="white-space:pre-wrap;">${escapeHtml(item.essay_text || "")}</p>
+            </div>
+          </details>
+        </article>
+      `).join("");
+    }
+
+    loadFeedbackHistory();
+  </script>
+</body>
+</html>
