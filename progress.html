@@ -120,8 +120,43 @@ logoutButton.addEventListener("click", async () => {
 >
   Practice again
 </a>
+<button
+  class="btn btn-coral deleteFeedbackButton"
+  data-id="${item.id}"
+  style="margin-top:20px; margin-left:12px;"
+>
+  Delete
+</button>
         </article>
       `).join("");
+      document.querySelectorAll(".deleteFeedbackButton").forEach((button) => {
+  button.addEventListener("click", async () => {
+    const shouldDelete = window.confirm(
+      "Delete this saved feedback? This cannot be undone."
+    );
+
+    if (!shouldDelete) {
+      return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Deleting...";
+
+    const { error } = await supabaseClient
+      .from("feedback_history")
+      .delete()
+      .eq("id", button.dataset.id);
+
+    if (error) {
+      alert(error.message);
+      button.disabled = false;
+      button.textContent = "Delete";
+      return;
+    }
+
+    loadFeedbackHistory();
+  });
+});
     }
 
     loadFeedbackHistory();
