@@ -191,10 +191,12 @@ practicePrompt.addEventListener("change", () => {
   feedbackButton.addEventListener("click", async () => {
     const essay = studentEssay.value.trim();
 
-    if (essay.length < 30) {
-      alert("Please write at least a few sentences before getting feedback.");
-      return;
-    }
+    const words = essay.split(/\s+/).filter(Boolean).length;
+
+if (words < 50) {
+  alert("Please write at least 50 words before getting feedback.");
+  return;
+}
 
     const originalButtonText = feedbackButton.textContent;
 
