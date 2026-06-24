@@ -123,3 +123,11 @@ One short paragraph telling the student exactly what to revise next.
     );
   }
 };
+export const config = {
+  path: "/.netlify/functions/analyze-essay",
+  rateLimit: {
+    windowLimit: 3,
+    windowSize: 600,
+    aggregateBy: ["ip", "domain"]
+  }
+};
