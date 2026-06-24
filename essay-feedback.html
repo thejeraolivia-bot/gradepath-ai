@@ -169,7 +169,11 @@
       });
 
       const data = await response.json();
-
+if (response.status === 429) {
+  throw new Error(
+    "You have used your 3 feedback checks for now. Please try again in 10 minutes."
+  );
+}
       if (!response.ok) {
         throw new Error(data.error || "Feedback could not be prepared.");
       }
