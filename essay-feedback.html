@@ -236,7 +236,7 @@ if (response.status === 429) {
         <p class="eyebrow">GRADEPATH AI FEEDBACK</p>
         <h2>Your feedback is ready</h2>
         <p><strong>Writing type:</strong> ${escapeHtml(writingType.value)}</p>
-
+<p><strong>Practice prompt:</strong> ${escapeHtml(practicePrompt.value || "No prompt selected.")}</p>
         <div style="display:grid; gap:16px; margin-top:24px;">
           <section style="padding:20px; border-radius:16px; background:#e8f5ef;">
             <h3 style="margin-top:0;">✓ Strengths</h3>
