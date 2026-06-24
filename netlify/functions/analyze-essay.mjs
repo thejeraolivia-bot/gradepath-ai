@@ -97,7 +97,12 @@ One short paragraph telling the student exactly what to revise next.
 
     return new Response(
       JSON.stringify({
-        feedback: data.output_text
+        feedback: (data.output || [])
+  .flatMap((item) => item.content || [])
+  .filter((item) => item.type === "output_text")
+  .map((item) => item.text)
+  .join("\n")
+  .trim()
       }),
       {
         status: 200,
