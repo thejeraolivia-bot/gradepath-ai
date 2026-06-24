@@ -39,6 +39,33 @@
   <option value="Argumentative writing">Argumentative writing</option>
   <option value="Expository writing">Expository writing</option>
 </select>
+<label for="practicePrompt" style="display:block; margin-top:24px; font-weight:bold;">
+  Choose a practice prompt
+</label>
+
+<select
+  id="practicePrompt"
+  style="width:100%; margin-top:10px; padding:16px; font-size:16px;"
+>
+  <option value="">Choose a prompt</option>
+  <option value="Write about a time you had to make a difficult decision.">
+    A difficult decision
+  </option>
+  <option value="Describe a place that makes you feel peaceful and explain why.">
+    A peaceful place
+  </option>
+  <option value="Should teenagers have limits on social media use? Give reasons for your view.">
+    Social media limits
+  </option>
+  <option value="Explain why protecting the environment should matter to young people.">
+    Protecting the environment
+  </option>
+</select>
+
+<p
+  id="promptDisplay"
+  style="display:none; padding:16px; border-radius:14px; background:#f3edf9; line-height:1.6; margin-top:14px;"
+></p>
     <label for="studentEssay" style="display:block; margin-top:32px; font-weight:bold;">
       Your practice paragraph
     </label>
@@ -97,7 +124,18 @@
   const feedbackBox = document.getElementById("feedbackBox");
   const studentEssay = document.getElementById("studentEssay");
   const writingType = document.getElementById("writingType");
+const practicePrompt = document.getElementById("practicePrompt");
+const promptDisplay = document.getElementById("promptDisplay");
 
+practicePrompt.addEventListener("change", () => {
+  if (!practicePrompt.value) {
+    promptDisplay.style.display = "none";
+    return;
+  }
+
+  promptDisplay.textContent = "Practice prompt: " + practicePrompt.value;
+  promptDisplay.style.display = "block";
+});
   function escapeHtml(text) {
     return text.replace(/[&<>"']/g, (character) => {
       const characters = {
