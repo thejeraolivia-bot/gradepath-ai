@@ -277,7 +277,31 @@ if (response.status === 429) {
         <p style="margin-top:24px;">
           GradePath AI is study support only. Review feedback carefully and use it to revise your own work.
         </p>
+        <button
+  id="startOverButton"
+  class="btn btn-dark"
+  style="margin-top:16px;"
+>
+  Start new practice
+</button>
       `;
+    const startOverButton = document.getElementById("startOverButton");
+
+startOverButton.addEventListener("click", () => {
+  studentEssay.value = "";
+  writingType.value = "Narrative writing";
+  practicePrompt.value = "";
+  promptDisplay.style.display = "none";
+  feedbackBox.style.display = "none";
+  wordCount.textContent = "0 words";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+  studentEssay.focus();
+});  
     } catch (error) {
       feedbackBox.innerHTML = `
         <p class="eyebrow">GRADEPATH AI FEEDBACK</p>
