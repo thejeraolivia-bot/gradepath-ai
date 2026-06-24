@@ -154,6 +154,20 @@ practicePrompt.addEventListener("change", () => {
   promptDisplay.textContent = "Practice prompt: " + practicePrompt.value;
   promptDisplay.style.display = "block";
 });
+const pageParams = new URLSearchParams(window.location.search);
+
+const savedWritingType = pageParams.get("writingType");
+const savedPrompt = pageParams.get("prompt");
+
+if (savedWritingType) {
+  writingType.value = savedWritingType;
+}
+
+if (savedPrompt) {
+  practicePrompt.value = savedPrompt;
+  promptDisplay.textContent = "Practice prompt: " + savedPrompt;
+  promptDisplay.style.display = "block";
+}
   function escapeHtml(text) {
     return text.replace(/[&<>"']/g, (character) => {
       const characters = {
