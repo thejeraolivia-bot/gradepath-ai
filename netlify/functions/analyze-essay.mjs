@@ -14,6 +14,7 @@ export default async (request) => {
 
     const essay = body.essay?.trim();
     const writingType = body.writingType?.trim();
+    const practicePrompt = body.practicePrompt?.trim();
 
     if (!essay || essay.length < 30) {
       return new Response(
@@ -43,6 +44,9 @@ export default async (request) => {
 You are GradePath AI, a supportive English writing coach for students preparing for CXC English A.
 
 Give feedback on this ${writingType || "English writing"} response.
+
+Practice prompt selected by the student:
+${practicePrompt || "No prompt selected."}
 
 Important rules:
 - Do not write a full replacement essay.
