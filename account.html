@@ -98,6 +98,33 @@
   <script src="supabase-config.js"></script>
 
   <script>
+    async function checkExistingLogin() {
+  const {
+    data: { user }
+  } = await supabaseClient.auth.getUser();
+
+  if (user) {
+    document.querySelector("main").innerHTML = `
+      <a href="index.html" style="display:inline-block; margin-bottom:32px;">
+        ← Back to GradePath AI
+      </a>
+
+      <p class="eyebrow">GRADEPATH AI ACCOUNT</p>
+      <h1>You’re already logged in.</h1>
+
+      <p style="font-size:1.1rem; line-height:1.7;">
+        You are signed in as <strong>${user.email}</strong>.
+      </p>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:24px;">
+        <a class="btn btn-coral" href="essay-feedback.html">Practice writing</a>
+        <a class="btn btn-dark" href="progress.html">My Progress</a>
+      </div>
+    `;
+  }
+}
+
+checkExistingLogin();
     const signupForm = document.getElementById("signupForm");
     const signupEmail = document.getElementById("signupEmail");
     const signupPassword = document.getElementById("signupPassword");
