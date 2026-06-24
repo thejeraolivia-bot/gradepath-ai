@@ -278,6 +278,15 @@ if (response.status === 429) {
           GradePath AI is study support only. Review feedback carefully and use it to revise your own work.
         </p>
         <button
+  id="saveFeedbackButton"
+  class="btn btn-coral"
+  style="margin-top:16px;"
+>
+  Save this feedback
+</button>
+
+<p id="saveFeedbackMessage" style="margin-top:12px;"></p>
+        <button
   id="startOverButton"
   class="btn btn-dark"
   style="margin-top:16px;"
@@ -285,6 +294,44 @@ if (response.status === 429) {
   Start new practice
 </button>
       `;
+  const saveFeedbackButton = document.getElementById("saveFeedbackButton");
+const saveFeedbackMessage = document.getElementById("saveFeedbackMessage");
+
+saveFeedbackButton.addEventListener("click", async () => {
+  const {
+    data: { user }
+  } = await supabaseClient.auth.getUser();
+
+  if (!user) {
+    saveFeedbackMessage.textContent =
+      "Please log in or create an account before saving feedback.";
+    return;
+  }
+
+  saveFeedbackButton.disabled = true;
+  saveFeedbackMessage.textContent = "Saving your feedback...";
+
+  const { error } = await supabaseClient
+    .from("feedback_history")
+    .insert({
+      user_id: user.id,
+      writing_type: writingType.value,
+      practice_prompt: practicePrompt.value || null,
+      essay_text: essay,
+      strengths: strengths,
+      improvements: improve,
+      revision_task: revisionTask
+    });
+
+  if (error) {
+    saveFeedbackMessage.textContent = error.message;
+    saveFeedbackButton.disabled = false;
+    return;
+  }
+
+  saveFeedbackMessage.textContent = "Feedback saved to your account.";
+  saveFeedbackButton.textContent = "Saved";
+});    
     const startOverButton = document.getElementById("startOverButton");
 
 startOverButton.addEventListener("click", () => {
