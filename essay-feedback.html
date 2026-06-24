@@ -76,7 +76,9 @@
       placeholder="Write or paste a short English A practice paragraph here..."
       style="width:100%; margin-top:10px; padding:16px; font-size:16px;"
     ></textarea>
-
+<p id="wordCount" style="margin-top:8px; color:#5f6d73;">
+  0 words
+</p>
     <button
       id="feedbackButton"
       class="btn btn-coral"
@@ -124,6 +126,16 @@
   const feedbackBox = document.getElementById("feedbackBox");
   const studentEssay = document.getElementById("studentEssay");
   const writingType = document.getElementById("writingType");
+  const wordCount = document.getElementById("wordCount");
+
+studentEssay.addEventListener("input", () => {
+  const words = studentEssay.value
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
+
+  wordCount.textContent = `${words} words`;
+});
 const practicePrompt = document.getElementById("practicePrompt");
 const promptDisplay = document.getElementById("promptDisplay");
 
