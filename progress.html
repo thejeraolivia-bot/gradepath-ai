@@ -15,7 +15,13 @@
 
     <p class="eyebrow">GRADEPATH AI PROGRESS</p>
     <h1>My saved feedback</h1>
-
+<button
+  id="logoutButton"
+  class="btn btn-dark"
+  style="margin-top:12px;"
+>
+  Log out
+</button>
     <p id="progressMessage" style="font-size:1.05rem; line-height:1.7;">
       Loading your saved practice feedback...
     </p>
@@ -29,7 +35,12 @@
   <script>
     const progressMessage = document.getElementById("progressMessage");
     const historyList = document.getElementById("historyList");
+const logoutButton = document.getElementById("logoutButton");
 
+logoutButton.addEventListener("click", async () => {
+  await supabaseClient.auth.signOut();
+  window.location.href = "account.html";
+});
     function escapeHtml(text = "") {
       return text.replace(/[&<>"']/g, (character) => {
         const characters = {
