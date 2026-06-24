@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Account | GradePath AI</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <main style="max-width:760px; margin:0 auto; padding:60px 24px;">
+    <a href="index.html" style="display:inline-block; margin-bottom:32px;">
+      ← Back to GradePath AI
+    </a>
+
+    <p class="eyebrow">GRADEPATH AI ACCOUNT</p>
+    <h1>Save feedback and track your progress.</h1>
+
+    <p style="font-size:1.1rem; line-height:1.7;">
+      Create an account to save your writing feedback and return to it later.
+    </p>
+
+    <div style="display:grid; gap:28px; margin-top:32px;">
+
+      <section style="padding:28px; border-radius:18px; background:#f7f3ec;">
+        <h2 style="margin-top:0;">Create an account</h2>
+
+        <form id="signupForm" style="display:grid; gap:14px;">
+          <label>
+            Email address
+            <input
+              id="signupEmail"
+              type="email"
+              required
+              placeholder="Email address"
+              style="width:100%; margin-top:8px; padding:14px; font-size:16px;"
+            >
+          </label>
+
+          <label>
+            Password
+            <input
+              id="signupPassword"
+              type="password"
+              required
+              minlength="8"
+              placeholder="At least 8 characters"
+              style="width:100%; margin-top:8px; padding:14px; font-size:16px;"
+            >
+          </label>
+
+          <button class="btn btn-coral" type="submit">
+            Create account
+          </button>
+        </form>
+
+        <p id="signupMessage" style="margin-top:14px;"></p>
+      </section>
+
+      <section style="padding:28px; border-radius:18px; background:#e8f5ef;">
+        <h2 style="margin-top:0;">Log in</h2>
+
+        <form id="loginForm" style="display:grid; gap:14px;">
+          <label>
+            Email address
+            <input
+              id="loginEmail"
+              type="email"
+              required
+              placeholder="Email address"
+              style="width:100%; margin-top:8px; padding:14px; font-size:16px;"
+            >
+          </label>
+
+          <label>
+            Password
+            <input
+              id="loginPassword"
+              type="password"
+              required
+              placeholder="Password"
+              style="width:100%; margin-top:8px; padding:14px; font-size:16px;"
+            >
+          </label>
+
+          <button class="btn btn-dark" type="submit">
+            Log in
+          </button>
+        </form>
+
+        <p id="loginMessage" style="margin-top:14px;"></p>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+
+  <script>
+    const signupForm = document.getElementById("signupForm");
+    const signupEmail = document.getElementById("signupEmail");
+    const signupPassword = document.getElementById("signupPassword");
+    const signupMessage = document.getElementById("signupMessage");
+
+    const loginForm = document.getElementById("loginForm");
+    const loginEmail = document.getElementById("loginEmail");
+    const loginPassword = document.getElementById("loginPassword");
+    const loginMessage = document.getElementById("loginMessage");
+
+    signupForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      signupMessage.textContent = "Creating your account...";
+
+      const { error } = await supabaseClient.auth.signUp({
+        email: signupEmail.value.trim(),
+        password: signupPassword.value
+      });
+
+      if (error) {
+        signupMessage.textContent = error.message;
+        return;
+      }
+
+      signupMessage.textContent =
+        "Account created. Check your email to confirm it before logging in.";
+    });
+
+    loginForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      loginMessage.textContent = "Logging you in...";
+
+      const { error } = await supabaseClient.auth.signInWithPassword({
+        email: loginEmail.value.trim(),
+        password: loginPassword.value
+      });
+
+      if (error) {
+        loginMessage.textContent = error.message;
+        return;
+      }
+
+      window.location.href = "essay-feedback.html";
+    });
+  </script>
+</body>
+</html>
