@@ -359,7 +359,8 @@ saveFeedbackButton.addEventListener("click", async () => {
   }
 
   saveFeedbackMessage.textContent = "Feedback saved to your account.";
-  saveFeedbackButton.textContent = "Saved";
+  saveFeedbackButton.textContent = "Saved to My Progress";
+  saveFeedbackButton.disabled = true;
 });    
     const startOverButton = document.getElementById("startOverButton");
 
@@ -370,7 +371,9 @@ startOverButton.addEventListener("click", () => {
   promptDisplay.style.display = "none";
   feedbackBox.style.display = "none";
   wordCount.textContent = "0 words";
-
+saveFeedbackButton.disabled = false;
+saveFeedbackButton.textContent = "Save this feedback";
+saveFeedbackMessage.textContent = "";
   window.scrollTo({
     top: 0,
     behavior: "smooth"
