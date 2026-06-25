@@ -94,7 +94,12 @@ logoutButton.addEventListener("click", async () => {
           </h2>
 
           <p><strong>Prompt:</strong> ${escapeHtml(item.practice_prompt || "No prompt selected.")}</p>
-
+<details style="margin-top:14px;">
+  <summary style="cursor:pointer; font-weight:bold;">View my response</summary>
+  <p style="margin-top:12px; line-height:1.7; white-space:pre-wrap;">
+    ${escapeHtml(item.essay_text || "")}
+  </p>
+</details>
           <details style="margin-top:18px;">
             <summary style="cursor:pointer; font-weight:bold;">View feedback</summary>
 
