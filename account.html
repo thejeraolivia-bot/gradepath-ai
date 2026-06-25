@@ -191,7 +191,7 @@ const forgotPasswordButton = document.getElementById("forgotPasswordButton");
   forgotPasswordButton.textContent = "Sending reset email...";
 
   const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
-    redirectTo: "https://gradepathai.netlify.app/account.html"
+    redirectTo: "https://gradepathai.netlify.app/reset-password.html"
   });
 
   if (error) {
