@@ -212,7 +212,10 @@ if (savedPrompt) {
     const essay = studentEssay.value.trim();
 
     const words = essay.split(/\s+/).filter(Boolean).length;
-
+if (words > 1000) {
+  alert("Please keep your practice response under 1,000 words.");
+  return;
+}
 if (words < 50) {
   alert("Please write at least 50 words before getting feedback.");
   return;

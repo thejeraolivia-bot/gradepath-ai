@@ -61,10 +61,9 @@ logoutButton.addEventListener("click", async () => {
       } = await supabaseClient.auth.getUser();
 
       if (!user) {
-        progressMessage.innerHTML =
-          'Please <a href="account.html">log in</a> to view your saved feedback.';
-        return;
-      }
+  window.location.href = "account.html";
+  return;
+}
 
       const { data, error } = await supabaseClient
         .from("feedback_history")
