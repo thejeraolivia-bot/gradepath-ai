@@ -67,7 +67,8 @@ Important rules:
 - Be encouraging, specific, and age-appropriate.
 - Focus on clarity, structure, examples, grammar, and sentence control.
 - Give practical revision advice.
-
+- Check how well the student answered the selected practice prompt and matched the writing type.
+- Comment on ideas and organization, vocabulary and sentence variety, grammar, spelling, and punctuation.
 Student response:
 ${essay}
 
