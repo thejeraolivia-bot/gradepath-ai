@@ -91,7 +91,8 @@ One short paragraph telling the student exactly what to revise next.
       },
       body: JSON.stringify({
         model: "gpt-5-mini",
-        input: prompt
+max_output_tokens: 500,
+input: prompt
       })
     });
 
