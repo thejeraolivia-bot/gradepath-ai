@@ -89,6 +89,13 @@
         </form>
 
         <p id="loginMessage" style="margin-top:14px;"></p>
+        <button
+  id="forgotPasswordButton"
+  type="button"
+  style="margin-top:12px; background:none; border:none; padding:0; color:#3b5bdb; text-decoration:underline; cursor:pointer;"
+>
+  Forgot password?
+</button>
       </section>
 
     </div>
@@ -110,7 +117,7 @@
       </a>
 
       <p class="eyebrow">GRADEPATH AI ACCOUNT</p>
-      <h1>You’re already logged in.</h1>
+      <h1>You're already logged in.</h1>
 
       <p style="font-size:1.1rem; line-height:1.7;">
         You are signed in as <strong>${user.email}</strong>.
@@ -134,7 +141,7 @@ checkExistingLogin();
     const loginEmail = document.getElementById("loginEmail");
     const loginPassword = document.getElementById("loginPassword");
     const loginMessage = document.getElementById("loginMessage");
-
+const forgotPasswordButton = document.getElementById("forgotPasswordButton");
     signupForm.addEventListener("submit", async (event) => {
       event.preventDefault();
 
@@ -171,6 +178,33 @@ checkExistingLogin();
 
       window.location.href = "essay-feedback.html";
     });
+    forgotPasswordButton.addEventListener("click", async () => {
+  const email = loginEmail.value.trim();
+
+  if (!email) {
+    loginMessage.textContent =
+      "Enter your email address first, then click Forgot password.";
+    return;
+  }
+
+  forgotPasswordButton.disabled = true;
+  forgotPasswordButton.textContent = "Sending reset email...";
+
+  const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+    redirectTo: "https://gradepathai.netlify.app/account.html"
+  });
+
+  if (error) {
+    loginMessage.textContent = error.message;
+    forgotPasswordButton.disabled = false;
+    forgotPasswordButton.textContent = "Forgot password?";
+    return;
+  }
+
+  loginMessage.textContent =
+    "Password reset email sent. Check your inbox and spam folder.";
+  forgotPasswordButton.textContent = "Reset email sent";
+});
   </script>
 </body>
 </html>
