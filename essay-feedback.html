@@ -140,7 +140,7 @@ studentEssay.addEventListener("input", () => {
     .split(/\s+/)
     .filter(Boolean).length;
 
-  wordCount.textContent = `${words} words`;
+  wordCount.textContent = `${words} / 1,000 words`;
 });
 const practicePrompt = document.getElementById("practicePrompt");
 const promptDisplay = document.getElementById("promptDisplay");
