@@ -27,7 +27,19 @@ export default async (request) => {
         }
       );
     }
+const wordCount = essay.split(/\s+/).filter(Boolean).length;
 
+if (wordCount > 1000) {
+  return new Response(
+    JSON.stringify({
+      error: "Please keep the practice response under 1,000 words."
+    }),
+    {
+      status: 400,
+      headers: { "Content-Type": "application/json" }
+    }
+  );
+}
     if (essay.length > 6000) {
       return new Response(
         JSON.stringify({
