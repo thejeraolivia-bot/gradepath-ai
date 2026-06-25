@@ -338,6 +338,7 @@ saveFeedbackButton.addEventListener("click", async () => {
   }
 
   saveFeedbackButton.disabled = true;
+  saveFeedbackButton.textContent = "Saving...";
   saveFeedbackMessage.textContent = "Saving your feedback...";
 
   const { error } = await supabaseClient
